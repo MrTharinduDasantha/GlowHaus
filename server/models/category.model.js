@@ -28,15 +28,16 @@ const categorySchema = new mongoose.Schema(
 );
 
 // Auto-generate slug from name on save (e.g. "Spa & Massage" -> "spa-massage")
-categorySchema.pre("save", function (next) {
+categorySchema.pre("save", function () {
   if (this.isModified("name")) {
     this.slug = this.name
       .toLowerCase()
+      .trim()
       .replace(/&/g, "and")
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-|-$/g, "");
+      .replace(/[^a-z0-9]+/g, "-") // This covers all non-alphanumeric chars
+      .replace(/-+/g, "-") // This collapses multiple hyphens (---) into one (-)
+      .replace(/^-|-$/g, ""); // This trims hyphens from the start and end
   }
-  next();
 });
 
 const Category = mongoose.model("Category", categorySchema);

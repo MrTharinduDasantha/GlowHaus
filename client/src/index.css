@@ -1,1 +1,291 @@
+/* Premium luxury display + body typography
+   — Cormorant Garamond is dramatic, editorial, perfect for a beauty brand
+   — Plus Jakarta Sans is clean and modern, pairs beautifully without clichés */
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+
+/* Tailwind v4 — CSS-first config. All theme tokens are declared here. */
 @import "tailwindcss";
+
+/* ──────────────────────────────────────────────────────────────────
+   THEME — design tokens (Tailwind v4 @theme)
+   These become utilities automatically:
+     bg-bg-base, text-rose-gold, border-line-soft, font-display, etc.
+   ────────────────────────────────────────────────────────────────── */
+@theme {
+  /* ── Brand palette — rose-gold + champagne on charcoal ── */
+  --color-rose-gold: #e8b4a0; /* primary brand */
+  --color-rose-gold-deep: #b87a5e; /* hover / pressed */
+  --color-champagne: #f5d6c4; /* highlights */
+  --color-soft-pink: #f3a5b6; /* subtle accent */
+  --color-burgundy: #3a1f2a; /* deep accent */
+
+  /* ── Surface palette — layered darkness ── */
+  --color-bg-base: #0a0a0d; /* page background */
+  --color-bg-surface: #12121a; /* cards */
+  --color-bg-elevated: #1a1a23; /* modals, dropdowns */
+  --color-bg-glass: rgba(26, 26, 35, 0.6);
+
+  /* ── Lines + dividers ── */
+  --color-line-soft: #2a2a35;
+  --color-line-strong: #3a3a47;
+
+  /* ── Text ── */
+  --color-text-primary: #f5f5f7;
+  --color-text-secondary: #a8a8b3;
+  --color-text-muted: #6a6a72;
+
+  /* ── Status ── */
+  --color-success: #6ee7a7;
+  --color-warning: #fbbf24;
+  --color-danger: #f87171;
+  --color-info: #93c5fd;
+
+  /* ── Typography stacks ── */
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+
+  /* ── Custom shadows w/ rose-gold glow ── */
+  --shadow-glow: 0 0 40px rgba(232, 180, 160, 0.15);
+  --shadow-glow-lg: 0 0 80px rgba(232, 180, 160, 0.2);
+  --shadow-elevated:
+    0 4px 24px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(232, 180, 160, 0.05);
+
+  /* ── Brand gradients (used as background utilities) ── */
+  --gradient-rose: linear-gradient(135deg, #e8b4a0 0%, #b87a5e 100%);
+  --gradient-luxe: linear-gradient(135deg, #3a1f2a 0%, #1a1a23 100%);
+  --gradient-glow: radial-gradient(
+    circle at 50% 0%,
+    rgba(232, 180, 160, 0.15) 0%,
+    transparent 60%
+  );
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   GLOBAL RESETS & DEFAULTS
+   ────────────────────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg-base);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-feature-settings: "ss01", "cv01";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* All headings get the elegant display serif by default */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   CUSTOM SCROLLBAR — match the dark luxe aesthetic
+   ────────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg-base);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    var(--color-rose-gold-deep),
+    var(--color-burgundy)
+  );
+  border-radius: 8px;
+  border: 2px solid var(--color-bg-base);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-rose-gold);
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   SELECTION + FOCUS STATES — branded
+   ────────────────────────────────────────────────────────────────── */
+::selection {
+  background: var(--color-rose-gold);
+  color: var(--color-bg-base);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-rose-gold);
+  outline-offset: 2px;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   REUSABLE UTILITY CLASSES
+   ────────────────────────────────────────────────────────────────── */
+
+/* Glassmorphism panel — used on cards, modals, navbar */
+.glass-panel {
+  background: var(--color-bg-glass);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid var(--color-line-soft);
+}
+
+/* Gradient text — for hero headlines, brand mentions */
+.gradient-text {
+  background: var(--gradient-rose);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Hairline divider with rose-gold center */
+.divider-luxe {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-rose-gold) 50%,
+    transparent 100%
+  );
+  opacity: 0.4;
+}
+
+/* Primary button (rose-gold gradient) */
+.btn-primary {
+  background: var(--gradient-rose);
+  color: var(--color-bg-base);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.75rem 1.75rem;
+  border-radius: 9999px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 16px rgba(232, 180, 160, 0.25);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(232, 180, 160, 0.4);
+}
+.btn-primary:active {
+  transform: translateY(0);
+}
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Outline / ghost button */
+.btn-outline {
+  background: transparent;
+  color: var(--color-rose-gold);
+  border: 1px solid var(--color-rose-gold);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding: 0.75rem 1.75rem;
+  border-radius: 9999px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-outline:hover {
+  background: var(--color-rose-gold);
+  color: var(--color-bg-base);
+}
+
+/* Hero radial glow background */
+.hero-glow {
+  background-image: var(--gradient-glow);
+}
+
+/* Form input styling */
+.input-luxe {
+  width: 100%;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-line-soft);
+  color: var(--color-text-primary);
+  padding: 0.875rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  font-family: var(--font-body);
+}
+.input-luxe::placeholder {
+  color: var(--color-text-muted);
+}
+.input-luxe:focus {
+  border-color: var(--color-rose-gold);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(232, 180, 160, 0.15);
+}
+
+/* Uppercase tracked-out label (e.g. "L U X U R Y · S A L O N") */
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+/* Container — caps content width on big screens */
+.container-luxe {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-inline: 1.25rem;
+}
+@media (min-width: 768px) {
+  .container-luxe {
+    padding-inline: 2rem;
+  }
+}
+@media (min-width: 1280px) {
+  .container-luxe {
+    padding-inline: 3rem;
+  }
+}
+
+/* React Datepicker overrides — match the dark luxe theme */
+.react-datepicker {
+  background: var(--color-bg-elevated) !important;
+  border: 1px solid var(--color-line-soft) !important;
+  font-family: var(--font-body) !important;
+  color: var(--color-text-primary) !important;
+}
+.react-datepicker__header {
+  background: var(--color-bg-surface) !important;
+  border-bottom: 1px solid var(--color-line-soft) !important;
+}
+.react-datepicker__day,
+.react-datepicker__day-name,
+.react-datepicker__current-month {
+  color: var(--color-text-primary) !important;
+}
+.react-datepicker__day:hover {
+  background: var(--color-rose-gold-deep) !important;
+}
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background: var(--color-rose-gold) !important;
+  color: var(--color-bg-base) !important;
+}
+.react-datepicker__day--disabled {
+  color: var(--color-text-muted) !important;
+  opacity: 0.4 !important;
+}
+
+/* React Toastify overrides — branded toasts */
+.Toastify__toast {
+  background: var(--color-bg-elevated) !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--color-line-soft) !important;
+  font-family: var(--font-body) !important;
+}
+.Toastify__progress-bar {
+  background: var(--gradient-rose) !important;
+}
