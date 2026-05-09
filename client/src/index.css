@@ -171,6 +171,7 @@ h6 {
 .btn-primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(232, 180, 160, 0.4);
+  cursor: pointer;
 }
 .btn-primary:active {
   transform: translateY(0);

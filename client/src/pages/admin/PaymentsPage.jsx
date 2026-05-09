@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import PaymentTable from "../../components/admin/PaymentTable.jsx";
+import Loader from "../../components/common/Loader.jsx";
 import { paymentApi } from "../../api/payment.api.js";
 
 const statusFilters = ["all", "pending", "succeeded", "failed", "refunded"];
@@ -73,7 +74,7 @@ const PaymentsPage = () => {
       </div>
 
       {loading ? (
-        <p className="text-text-muted">Loading…</p>
+        <Loader fullScreen={false} label="Loading payments" />
       ) : (
         <PaymentTable payments={payments} />
       )}

@@ -34,7 +34,7 @@ const BookingDetailsPage = () => {
     fetchAll(); /* eslint-disable-next-line */
   }, [id]);
 
-  if (loading || !booking) return <Loader label="Loading booking" />;
+  if (loading || !booking) return;
 
   // Has the customer already reviewed this service for this booking?
   const hasReviewed = (serviceId) =>

@@ -3,6 +3,7 @@
 
 import { motion } from "framer-motion";
 import { format } from "date-fns";
+import { toLocalDate } from "../../utils/formatDate.js";
 import { formatCurrency } from "../../utils/formatCurrency.js";
 
 const statusColor = {
@@ -33,7 +34,7 @@ const StylistScheduleView = ({ appointments = [], onSelect }) => {
       {Object.entries(grouped).map(([date, items]) => (
         <div key={date}>
           <p className="eyebrow text-rose-gold mb-3">
-            {format(new Date(date), "EEEE, MMM d yyyy")}
+            {format(toLocalDate(date), "EEEE, MMM d yyyy")}
           </p>
           <div className="space-y-2">
             {items.map((a, i) => (
@@ -49,10 +50,10 @@ const StylistScheduleView = ({ appointments = [], onSelect }) => {
                 {/* Time block */}
                 <div className="text-center px-3 py-2 rounded-lg bg-bg-elevated">
                   <p className="font-display text-lg leading-tight">
-                    {format(new Date(a.startTime), "h:mm")}
+                    {format(toLocalDate(a.startTime), "h:mm")}
                   </p>
                   <p className="text-[10px] uppercase tracking-widest text-text-muted">
-                    {format(new Date(a.startTime), "a")}
+                    {format(toLocalDate(a.startTime), "a")}
                   </p>
                 </div>
 

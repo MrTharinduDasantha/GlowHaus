@@ -19,9 +19,9 @@ const DatePicker = ({
     <ReactDatePicker
       selected={value}
       onChange={onChange}
-      // minDate={minDate}
+      minDate={minDate}
       maxDate={maxDate}
-      // excludeDates={disabledDates}
+      excludeDates={disabledDates}
       inline={inline}
       dateFormat="EEE, MMM d yyyy"
       placeholderText="Choose a date"

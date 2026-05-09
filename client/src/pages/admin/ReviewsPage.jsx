@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import ReviewModerationTable from "../../components/admin/ReviewModerationTable.jsx";
 import ConfirmDialog from "../../components/common/ConfirmDialog.jsx";
+import Loader from "../../components/common/Loader.jsx";
 import { reviewApi } from "../../api/review.api.js";
 
 const ReviewsPage = () => {
@@ -59,7 +60,7 @@ const ReviewsPage = () => {
       </div>
 
       {loading ? (
-        <p className="text-text-muted">Loading…</p>
+        <Loader fullScreen={false} label="Loading reviews" />
       ) : (
         <ReviewModerationTable
           reviews={list}

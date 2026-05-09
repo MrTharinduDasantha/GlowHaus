@@ -14,6 +14,7 @@ import Modal from "../../components/common/Modal.jsx";
 import ConfirmDialog from "../../components/common/ConfirmDialog.jsx";
 import AlbumForm from "../../components/admin/AlbumForm.jsx";
 import GalleryUploader from "../../components/admin/GalleryUploader.jsx";
+import Loader from "../../components/common/Loader.jsx";
 import { galleryApi } from "../../api/gallery.api.js";
 
 const GalleryPage = () => {
@@ -94,7 +95,7 @@ const GalleryPage = () => {
         </div>
 
         {loading ? (
-          <p className="text-text-muted">Loading…</p>
+          <Loader fullScreen={false} label="Loading reviews" />
         ) : albums.length === 0 ? (
           <p className="text-text-muted py-12 text-center">
             No albums yet — create the first.

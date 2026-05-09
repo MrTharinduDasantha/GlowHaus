@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { format } from "date-fns";
+import { toLocalDate } from "../../utils/formatDate.js";
 import { formatCurrency } from "../../utils/formatCurrency.js";
 
 const statuses = ["all", "pending", "confirmed", "completed", "cancelled"];
@@ -78,7 +79,7 @@ const AppointmentTable = ({
                     {b.stylistName}
                   </td>
                   <td className="px-4 py-3 text-text-secondary whitespace-nowrap">
-                    {format(new Date(b.startTime), "MMM d, h:mm a")}
+                    {format(toLocalDate(b.startTime), "MMM d, h:mm a")}
                   </td>
                   <td className="px-4 py-3">
                     <span

@@ -15,6 +15,7 @@ import RevenueChart from "../../components/admin/RevenueChart.jsx";
 import BookingsStatusChart from "../../components/admin/BookingsStatusChart.jsx";
 import TopServicesChart from "../../components/admin/TopServicesChart.jsx";
 import Loader from "../../components/common/Loader.jsx";
+import { toLocalDate } from "../../utils/formatDate.js";
 import { formatCurrency } from "../../utils/formatCurrency.js";
 
 const DashboardPage = () => {
@@ -127,7 +128,7 @@ const DashboardPage = () => {
                       {b.stylist?.name}
                     </td>
                     <td className="px-4 py-3 text-text-secondary whitespace-nowrap">
-                      {format(new Date(b.startTime), "MMM d, h:mm a")}
+                      {format(toLocalDate(b.startTime), "MMM d, h:mm a")}
                     </td>
                     <td className="px-4 py-3 text-right text-rose-gold font-medium">
                       {formatCurrency(b.totalAmount)}
